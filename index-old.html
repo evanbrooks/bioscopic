@@ -1,0 +1,22 @@
+<head>
+	<title>Orientation</title>
+</head>
+
+<body>
+	<div id="orient"></div>
+</body>
+
+
+<script>
+
+	var orient = document.getElementById("orient");
+
+    window.addEventListener("deviceorientation", function () {
+        tilt([event.alpha, event.beta, event.gamma]);
+    }, true);
+
+    function tilt(data) {
+    	var string = parseInt(data[0]) + "<br/>" + parseInt(data[1]) + "<br/>" + parseInt(data[2]);
+    	orient.innerHTML = string;
+    }
+</script>
