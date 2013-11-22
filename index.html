@@ -187,8 +187,8 @@
     {t:   11, r:  -2},
     {t:   5,  r: -8},
   // letterpress
-    {t:  10, r:   6},
-    {t:   7, r:  -6},
+    {t:  7.7, r:  -7.3},
+    {t:   7.9, r:  10.3},
   // velocity
     {t:   7, r:  9},
   // emoji
@@ -198,20 +198,20 @@
     {t:   4, r:  10},
   // oyster
     {t:   9, r:  -6},
-    {t:   12, r:  0},
-    {t:   6, r:  -6},
+    {t:   11.4, r:  2.5},
+    {t:   6.5, r:  -7},
   // google now
-    {t:   7, r:  -6},
-    {t:   7, r:  -6},
+    {t:   3.5, r:  -12},
+    {t:   10.3, r:  2.2},
   // metro
-    {t:   7, r:  -6},
-    {t:   7, r:  -6},
+    {t:   7.2, r:  -9.5},
+    {t:   6,   r:  10.8},
   // rdio
-    {t:   7, r:  -6},
-    {t:   7, r:  -6},
+    {t:   9.6, r: -4},
+    {t:   8.2, r: 8.2},
   ];
 
-	var vari = 1.2;
+	// var vari = 1.2;
 
 
 
@@ -231,14 +231,18 @@
     var current = document.getElementsByClassName("show")[0];
     if (current) current.className = "bg";
 
+    var results = [];
     for (var i = 0; i < pos.length; i++) {
-      if (t < pos[i].t + vari && t > pos[i].t - vari &&
-        r < pos[i].r + vari && r > pos[i].r - vari) {
-        // posname.innerHTML = i;
-        document.getElementById("pos" + i).className = "bg show";
-        break;
+      var vari1 = Math.abs(t - pos[i].t);
+      var vari2 = Math.abs(r - pos[i].r);
+      results.push({
+        id: i,
+        dist: vari1*vari1 + vari2*vari2
+      })
       }
     }
+    results.sort(function(a,b){return a.dist - b.dist});
+    document.getElementById("pos" + results[0].id).className = "bg show";
   }
 
   	// if (t < pos1.t + vari && t > pos1.t - vari &&
