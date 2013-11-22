@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<head>
+	<title>Orientation</title>
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta
+    name	=	"viewport"
+    content =	"width 			= device-width,
+             	initial-scale	= 1.0,
+             	maximum-scale	= 1.0,
+             	user-scalable	= no"/>
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+  <style>
+  	* {
+  		box-sizing: border-box;
+  		padding: 0;
+  		margin: 0;
+      font: inherit;
+  	}
+  	nav {
+  		position: fixed;
+  		bottom: 0;
+  		left: 0;
+  		right: 0;
+      color: red;
+  		padding: 10px;
+      z-index: 999;
+  	}
+  	body {
+      background-color: black;
+  		-webkit-transition: all 0.5s;
+      background-size: 320px 480px;
+      color: white;
+      font-weight: bold;
+      font-family: sans-serif;
+  	}
+    .bg {
+      -webkit-transition: all 0.5s;
+      -webkit-transform: scale(0.95);
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    #setup {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 900;
+      background: white;
+      color: gray;
+      padding: 10%;
+      font-size: 18px;
+      -webkit-transition: all 0.2s;
+    }
+    #pos0 {
+      padding: 10%;
+      font-size: 18px;
+      background: black;
+      color: gray;
+    }
+    #setup.done-calibrating {
+      -webkit-transform: translate3d(0, 100%,0);
+    }
+    #setup button {
+      display: block;
+      margin: 1em 0;
+      padding: 1em;
+      width: 100%;
+    }
+    .bg img, .bg video {
+      width: 100%;
+    }
+    .bg.show {
+      -webkit-transform: scale(1);
+      opacity: 1;
+    }
+  	#orient {
+  		list-style: none;
+  		font-size: 10px;
+  	}
+  	#orient li {
+  		display: inline-block;
+  		width: 30%;
+  	}
+    #needle {
+      background: red;
+      height: 100%;
+      width: 4%;
+      top: 0;
+      left: 48%;
+      right: 48%;
+      position: absolute;
+    }
+  </style>
+
+</head>
+
+<body>
+	<nav>
+		<ul id="orient">
+			<li id="compass"></li>
+			<li id="tilt"></li>
+			<li id="roll"></li>
+		</ul>
+	</nav>
+	<div id="posname"></div>
+  <div class="bg" id="pos0">
+    Great! When you see outlines of phones in the book, align me the same way— Be sure the phone is lying flat, and if you change the angle of the book, refresh this page!
+  </div>
+
+
+  <!-- translate -->
+
+  <div class="bg" id="pos1">
+    <img src="http://i.imgur.com/sFNIU0h.png"/>
+  </div>
+  <div class="bg" id="pos2">
+    <img src="http://i.imgur.com/lMwIOYo.png"/>
+  </div>
+  <div class="bg" id="pos3">
+    <img src="http://i.imgur.com/bMJqa0w.png?1"/>
+  </div>
+
+
+  <!-- letterpress -->
+
+  <div class="bg" id="pos4">
+    <img src="http://i.imgur.com/LqgXkHf.gif"/>
+  </div>
+  <div class="bg" id="pos5">
+    <img src="http://i.imgur.com/xPr9rAY.png"/>
+  </div>
+
+
+  <!-- Velocity -->
+
+  <div class="bg" id="pos6">
+    <img src="http://i.imgur.com/UDsJYXS.gif"/>
+  </div>
+
+
+  <!-- Emoji -->
+
+  <div class="bg" id="pos7">
+    <img src="http://i.imgur.com/80m479a.png"/>
+  </div>
+
+
+  <!-- FB Home -->
+
+  <div class="bg" id="pos8">
+    <img src="http://i.imgur.com/UQjx7p0.png"/>
+  </div>
+  <div class="bg" id="pos9">
+    <img src="http://i.imgur.com/Uk45V8k.png"/>
+  </div>
+
+
+  <!-- Oyster -->
+
+  <div class="bg" id="pos10">
+    <img src="http://i.imgur.com/b09REX6.png"/>
+  </div>
+  <div class="bg" id="pos11">
+    <img src="http://i.imgur.com/9FQw4S7.png"/>
+  </div>
+  <div class="bg" id="pos12">
+    <img src="http://i.imgur.com/pNAZjcc.png"/>
+  </div>
+
+
+  <!-- Google Now -->
+
+  <div class="bg" id="pos13">
+    <img src="http://i.imgur.com/0of6GTg.gif"/>
+  </div>
+  <div class="bg" id="pos14">
+    <img src="http://i.imgur.com/ZYmESFr.gif"/>
+  </div>
+
+
+  <!-- Metro -->
+
+  <div class="bg" id="pos15">
+    <img src="http://i.imgur.com/fAlf4F7.png"/>
+  </div>
+  <div class="bg" id="pos16">
+    <img src="http://i.imgur.com/DMrga3N.png"/>
+  </div>
+
+
+  <!-- Rdio -->
+
+  <div class="bg" id="pos17">
+    <img src="http://i.imgur.com/86Qdj9u.png"/>
+  </div>
+  <div class="bg" id="pos18">
+    <img src="http://i.imgur.com/Q1bSWdL.png"/>
+  </div>
+
+  <div id="setup">
+    Hi there! Place me down firmly on page 7
+    <button id="calibrate">Okay, I did that</button>
+  </div>
+
+  <div id="needle"></div>
+
+
+
+</body>
+
+
+<script>
+	var doc = {
+		tilt: document.getElementById("tilt"),
+		roll: document.getElementById("roll"),
+		compass: document.getElementById("compass"),
+    calib: document.getElementById("calibrate"),
+    setup: document.getElementById("setup"),
+    needle: document.getElementById("needle")
+	};
+
+  var pos = [
+    {t:  10, r: 0, a: 0},
+  // translate
+    {t:   8.4, r:  -4},
+    {t:   11, r:  -2},
+    {t:   5,  r: -8},
+  // letterpress
+    {t:   7.9, r:  10.3},
+    {t:  7.7, r:  -7.3},
+  // velocity
+    {t:   6.5, r:  6},
+  // emoji
+    {t:   10, r:  5},
+  // facebook home
+    {t:   9.5, r:  0.5},
+    {t:   3.5, r:  9.5},
+  // oyster
+    {t:   9, r:  -6},
+    {t:   6.5, r:  -7},
+    {t:   11.4, r:  2.5},
+  // google now
+    {t:   10.3, r:  2.2},
+    {t:   3.5, r:  -12},
+  // metro
+    {t:   7.2, r:  -9.5},
+    {t:   6,   r:  10.8},
+  // rdio
+    {t:   8.2, r: 8.2},
+    {t:   9.6, r: -4},
+  ];
+
+	// var vari = 1.2;
+
+  var t = 0, r = 0, t_cal = 0, r_cal = 0;
+
+  window.addEventListener("deviceorientation", function () {
+      step([event.alpha, event.beta, event.gamma]);
+  }, true);
+
+  doc.calib.addEventListener("click", function() {
+      a_cal = a - pos[0].a;
+      t_cal = t - pos[0].t;
+      r_cal = r - pos[0].r;
+      doc.setup.className = "done-calibrating";
+  }, true);
+
+
+  function step(data) {
+    a = parseInt(10 * data[0]) / 10;
+  	t = parseInt(10 * data[1]) / 10;
+  	r = parseInt(10 * data[2]) / 10;
+
+    var adjusted_a = a - a_cal;
+    var adjusted_t = t - t_cal;
+    var adjusted_r = r - r_cal;
+
+  	doc.compass.innerHTML = "Compass: " + adjusted_a;
+  	doc.tilt.innerHTML = "Tilt: " + adjusted_t;
+  	doc.roll.innerHTML = "Roll: " + adjusted_r;
+
+    doc.compass.style.webkitTransform = "rotate(" + adjusted_a + "deg)";
+
+    // var current = document.getElementsByClassName("show")[0];
+    // if (current) current.className = "bg";
+
+    // var results = [];
+    // for (var i = 0; i < pos.length; i++) {
+    //   var vari1 = Math.abs(adjusted_t - pos[i].t);
+    //   var vari2 = Math.abs(adjusted_r - pos[i].r);
+    //   results.push({
+    //     id: i,
+    //     dist: vari1*vari1 + vari2*vari2
+    //   });
+    // }
+    // results.sort(function(a,b){return a.dist - b.dist});
+    // document.getElementById("pos" + results[0].id).className = "bg show";
+  }
+
+  	// if (t < pos1.t + vari && t > pos1.t - vari &&
+  	// 	r < pos1.r + vari && r > pos1.r - vari) {
+  	// 	posname.innerHTML = "Position 1";
+  	// 	document.getElementById("pos1").className = "bg show";
+   //  } else if (t < pos2.t + vari && t > pos2.t - vari &&
+   //    r < pos2.r + vari && r > pos2.r - vari) {
+   //    posname.innerHTML = "Position 2";
+   //    document.getElementById("pos2").className = "bg show";
+   //  } else if (t < pos3.t + vari && t > pos3.t - vari &&
+   //    r < pos3.r + vari && r > pos3.r - vari) {
+   //    posname.innerHTML = "Position 3";
+   //    document.getElementById("pos3").className = "bg show";
+  	// } else {
+  	// 	posname.innerHTML = "???";
+  	// }
+
+</script>
