@@ -183,23 +183,23 @@
   var pos = [
     {t:  10, r:   0},
   // translate
-    {t:   10, r:  -2},
+    {t:   9, r:  -3},
     {t:   11, r:  -2},
-    {t:   5,  r: -7},
+    {t:   5,  r: -8},
   // letterpress
     {t:  10, r:   6},
     {t:   7, r:  -6},
   // velocity
     {t:   7, r:  9},
   // emoji
-    {t:   13, r:  4},
+    {t:   10, r:  5},
   // facebook home
-    {t:   13, r:  1},
-    {t:   4, r:  11},
+    {t:   10, r:  3},
+    {t:   4, r:  10},
   // oyster
-    {t:   9, r:  -7},
+    {t:   9, r:  -6},
     {t:   12, r:  0},
-    {t:   7, r:  -6},
+    {t:   6, r:  -6},
   // google now
     {t:   7, r:  -6},
     {t:   7, r:  -6},
@@ -211,7 +211,7 @@
     {t:   7, r:  -6},
   ];
 
-	var vari = 1.5;
+	var vari = 1.2;
 
 
 
@@ -222,8 +222,8 @@
 
 
   function step(data) {
-  	var t = parseInt(data[1]);
-  	var r = parseInt(data[2]);
+  	var t = parseInt(10 * data[1]) / 10;
+  	var r = parseInt(10 * data[2]) / 10;
   	// doc.compass.innerHTML = "Compass: " + parseInt(data[0]);
   	doc.tilt.innerHTML = "Tilt: " + t;
   	doc.roll.innerHTML = "Roll: " + r;
