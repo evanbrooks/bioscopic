@@ -28,13 +28,13 @@
       color: red;
   		padding: 10px;
       z-index: 999;
-      font-family: monospace;
   	}
   	body {
       background-color: black;
   		-webkit-transition: all 0.5s;
       background-size: 320px 480px;
       color: white;
+      font-family: monospace;
   	}
     .bg {
       -webkit-transition: all 0.5s;
@@ -44,6 +44,23 @@
       top: 0;
       left: 0;
       right: 0;
+    }
+    #setup {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 999;
+      background: white;
+      color: gray;
+      padding: 10%;
+      font-size: 24px;
+    }
+    #setup button {
+      display: block;
+      margin: 1em 0;
+      padding: 1em;
     }
     .bg img, .bg video {
       width: 100%;
@@ -171,8 +188,8 @@
   </div>
 
   <div id="setup">
-    Hi there! Place me down firmly on page 7, then press "Okay".
-    <button>Okay</button>
+    Hi there! Place me down firmly on page 7
+    <button>Okay, I did that</button>
   </div>
 
 
