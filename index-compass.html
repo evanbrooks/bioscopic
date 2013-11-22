@@ -230,32 +230,32 @@
   var pos = [
     {t:  10, r: 0, a: 0},
   // translate
-    {t:   8.4, r:  -4},
-    {t:   11, r:  -2},
-    {t:   5,  r: -8},
+    {t:   8.4, r:  -4, a:10},
+    {t:   11, r:  -2, a:-10},
+    {t:   5,  r: -8, a: 20},
   // letterpress
-    {t:   7.9, r:  10.3},
-    {t:  7.7, r:  -7.3},
+    {t:   7.9, r:  10.3, a: -20},
+    {t:  7.7, r:  -7.3, a: 30},
   // velocity
-    {t:   6.5, r:  6},
+    {t:   6.5, r:  6, a: -30},
   // emoji
-    {t:   10, r:  5},
+    {t:   10, r:  5, a: 40},
   // facebook home
-    {t:   9.5, r:  0.5},
-    {t:   3.5, r:  9.5},
+    {t:   9.5, r:  0.5, a: -40},
+    {t:   3.5, r:  9.5, a: 50},
   // oyster
-    {t:   9, r:  -6},
-    {t:   6.5, r:  -7},
-    {t:   11.4, r:  2.5},
+    {t:   9, r:  -6, a: -50},
+    {t:   6.5, r:  -7, a: 60},
+    {t:   11.4, r:  2.5, a: -60},
   // google now
-    {t:   10.3, r:  2.2},
-    {t:   3.5, r:  -12},
+    {t:   10.3, r:  2.2, a: 70},
+    {t:   3.5, r:  -12, a: -70},
   // metro
-    {t:   7.2, r:  -9.5},
-    {t:   6,   r:  10.8},
+    {t:   7.2, r:  -9.5, a: 80},
+    {t:   6,   r:  10.8, a: -80},
   // rdio
-    {t:   8.2, r: 8.2},
-    {t:   9.6, r: -4},
+    {t:   8.2, r: 8.2, a: 90},
+    {t:   9.6, r: -4, a: -90},
   ];
 
 	// var vari = 1.2;
@@ -289,20 +289,21 @@
 
     doc.needle.style.webkitTransform = "rotate(" + adjusted_a + "deg)";
 
-    // var current = document.getElementsByClassName("show")[0];
-    // if (current) current.className = "bg";
+    var current = document.getElementsByClassName("show")[0];
+    if (current) current.className = "bg";
 
-    // var results = [];
-    // for (var i = 0; i < pos.length; i++) {
-    //   var vari1 = Math.abs(adjusted_t - pos[i].t);
-    //   var vari2 = Math.abs(adjusted_r - pos[i].r);
-    //   results.push({
-    //     id: i,
-    //     dist: vari1*vari1 + vari2*vari2
-    //   });
-    // }
-    // results.sort(function(a,b){return a.dist - b.dist});
-    // document.getElementById("pos" + results[0].id).className = "bg show";
+    var results = [];
+    for (var i = 0; i < pos.length; i++) {
+      // var vari1 = Math.abs(adjusted_t - pos[i].t);
+      // var vari2 = Math.abs(adjusted_r - pos[i].r);
+      results.push({
+        id: i,
+        // dist: vari1*vari1 + vari2*vari2
+        dist: Math.abs(adjusted_a - pos[i].a)
+      });
+    }
+    results.sort(function(a,b){return a.dist - b.dist});
+    document.getElementById("pos" + results[0].id).className = "bg show";
   }
 
   	// if (t < pos1.t + vari && t > pos1.t - vari &&
