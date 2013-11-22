@@ -238,8 +238,7 @@
       results.push({
         id: i,
         dist: vari1*vari1 + vari2*vari2
-      })
-      }
+      });
     }
     results.sort(function(a,b){return a.dist - b.dist});
     document.getElementById("pos" + results[0].id).className = "bg show";
