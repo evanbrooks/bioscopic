@@ -15,21 +15,20 @@
 
   <style>
   	* {
-  		font-family: monospace;
   		box-sizing: border-box;
   		padding: 0;
   		margin: 0;
+      font: inherit;
   	}
   	nav {
   		position: fixed;
   		bottom: 0;
   		left: 0;
   		right: 0;
-  		border: 1px solid rgba(120,120,120,0.5);
-  		background: black;
-      color: white;
+      color: red;
   		padding: 10px;
       z-index: 999;
+      font-family: monospace;
   	}
   	body {
       background-color: black;
@@ -61,6 +60,9 @@
   		display: inline-block;
   		width: 30%;
   	}
+    #pos0 {
+      font-size: 40px;
+    }
   </style>
 
 </head>
@@ -75,7 +77,7 @@
 	</nav>
 	<div id="posname"></div>
   <div class="bg" id="pos0">
-    Nothing!
+    All set up!
   </div>
 
 
@@ -187,8 +189,8 @@
     {t:   11, r:  -2},
     {t:   5,  r: -8},
   // letterpress
-    {t:  7.7, r:  -7.3},
     {t:   7.9, r:  10.3},
+    {t:  7.7, r:  -7.3},
   // velocity
     {t:   7, r:  9},
   // emoji
@@ -198,17 +200,17 @@
     {t:   4, r:  10},
   // oyster
     {t:   9, r:  -6},
-    {t:   11.4, r:  2.5},
     {t:   6.5, r:  -7},
+    {t:   11.4, r:  2.5},
   // google now
-    {t:   3.5, r:  -12},
     {t:   10.3, r:  2.2},
+    {t:   3.5, r:  -12},
   // metro
     {t:   7.2, r:  -9.5},
     {t:   6,   r:  10.8},
   // rdio
-    {t:   9.6, r: -4},
     {t:   8.2, r: 8.2},
+    {t:   9.6, r: -4},
   ];
 
 	// var vari = 1.2;
