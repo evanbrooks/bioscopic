@@ -51,16 +51,27 @@
       left: 0;
       right: 0;
       bottom: 0;
-      z-index: 999;
+      z-index: 900;
       background: white;
       color: gray;
       padding: 10%;
       font-size: 18px;
+      -webkit-transition: all 0.2s;
+    }
+    #pos0 {
+      padding: 10%;
+      font-size: 18px;
+      background: black;
+      color: gray;
+    }
+    #setup.done-calibrating {
+      -webkit-transform: translate3d(0, 100%,0);
     }
     #setup button {
       display: block;
       margin: 1em 0;
       padding: 1em;
+      width: 100%;
     }
     .bg img, .bg video {
       width: 100%;
@@ -77,9 +88,6 @@
   		display: inline-block;
   		width: 30%;
   	}
-    #pos0 {
-      font-size: 40px;
-    }
   </style>
 
 </head>
@@ -94,7 +102,7 @@
 	</nav>
 	<div id="posname"></div>
   <div class="bg" id="pos0">
-    All set up!
+    Great! When you see outlines of phones in the book, align me the same way— Be sure the phone is lying flat, and if you change the angle of the book, refresh this page!
   </div>
 
 
@@ -189,7 +197,7 @@
 
   <div id="setup">
     Hi there! Place me down firmly on page 7
-    <button>Okay, I did that</button>
+    <button id="calibrate">Okay, I did that</button>
   </div>
 
 
@@ -202,6 +210,8 @@
 		tilt: document.getElementById("tilt"),
 		roll: document.getElementById("roll"),
 		compass: document.getElementById("compass"),
+    calib: document.getElementById("calibrate"),
+    setup: document.getElementById("setup")
 	};
 
   var pos = [
@@ -237,28 +247,37 @@
 
 	// var vari = 1.2;
 
-
+  var t = 0, r = 0, t_cal = 0, r_cal = 0;
 
   window.addEventListener("deviceorientation", function () {
       step([event.alpha, event.beta, event.gamma]);
   }, true);
 
+  doc.calib.addEventListener("click", function() {
+      t_cal = t - pos[0].t;
+      r_cal = r - pos[0].r;
+      doc.setup.className = "done-calibrating";
+  }, true);
 
 
   function step(data) {
-  	var t = parseInt(10 * data[1]) / 10;
-  	var r = parseInt(10 * data[2]) / 10;
+  	t = parseInt(10 * data[1]) / 10;
+  	r = parseInt(10 * data[2]) / 10;
+
+    var adjusted_t = t - t_cal;
+    var adjusted_r = t - r_cal;
+
   	// doc.compass.innerHTML = "Compass: " + parseInt(data[0]);
-  	doc.tilt.innerHTML = "Tilt: " + t;
-  	doc.roll.innerHTML = "Roll: " + r;
+  	doc.tilt.innerHTML = "Tilt: " + adjusted_t;
+  	doc.roll.innerHTML = "Roll: " + adjusted_r;
 
     var current = document.getElementsByClassName("show")[0];
     if (current) current.className = "bg";
 
     var results = [];
     for (var i = 0; i < pos.length; i++) {
-      var vari1 = Math.abs(t - pos[i].t);
-      var vari2 = Math.abs(r - pos[i].r);
+      var vari1 = Math.abs(adjusted_t - pos[i].t);
+      var vari2 = Math.abs(adjusted_r - pos[i].r);
       results.push({
         id: i,
         dist: vari1*vari1 + vari2*vari2
